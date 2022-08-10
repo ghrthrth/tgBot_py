@@ -1,5 +1,6 @@
-import telebot
 import requests
+import telebot
+import json
 
 bot = telebot.TeleBot("5424627277:AAEMba6dgSMkNyoznHAx_LfSK6kclTfWqNQ")
 
@@ -10,7 +11,8 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['go'])
 def send_welcome_go(message):
-	bot.reply_to(message, response.text)
+	price = response.json()['data']['10908']['quote']['USD']['price']
+	bot.reply_to(message, round(price, 4))
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
