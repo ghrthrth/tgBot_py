@@ -11,7 +11,7 @@ BTC = "bitcoin"
 ETH = "ethereum"
 SOL = "solana"
 KCS = "KCS"
-KUS = "Kuswap"
+KUS = "kuswap"
 USD = "usd"
 
 def bot_error_max_requests(message):
@@ -66,17 +66,20 @@ def echo_all(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
+    headers = {
+        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.72 Safari/537.36'}
+
     response_btc = requests.get(
-        "https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=" + BTC)
+        "https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=" + BTC, headers=headers)
 
     response_eth = requests.get(
-        "https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=" + ETH)
+        "https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=" + ETH, headers=headers)
 
     response_sol = requests.get(
-        "https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=" + SOL)
+        "https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=" + SOL, headers=headers)
 
     response_kus = requests.get(
-        "https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=" + KUS)
+        "https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=" + KUS, headers=headers)
 
     response_kcs = requests.get(
         "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=" + CMC_PRO_API_KEY + "&symbol=" + KCS)
